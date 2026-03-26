@@ -1,11 +1,11 @@
 # Education ROI Calculator (Full Stack)
 
-Production-style full-stack ROI calculator with a standalone frontend and backend.
+I4E ROI calculator with a frontend and backend.
 
 ## Stack
 
 - Frontend: Next.js (App Router), TypeScript, Tailwind CSS, Axios
-- Backend: Python FastAPI (in-memory JSON data, no database)
+- Backend: Python FastAPI (in-memory JSON data, no DB)
 
 ## Project Structure
 
