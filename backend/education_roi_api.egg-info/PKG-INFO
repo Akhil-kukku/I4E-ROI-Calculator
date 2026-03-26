@@ -1,0 +1,45 @@
+Metadata-Version: 2.4
+Name: education-roi-api
+Version: 0.1.0
+Summary: FastAPI backend for education ROI calculator
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi<1.0.0,>=0.115.0
+Requires-Dist: uvicorn[standard]<1.0.0,>=0.30.0
+Requires-Dist: pydantic<3.0.0,>=2.8.0
+Requires-Dist: pydantic-settings<3.0.0,>=2.3.0
+Provides-Extra: dev
+Requires-Dist: pytest<9.0.0,>=8.2.0; extra == "dev"
+Requires-Dist: httpx<1.0.0,>=0.27.0; extra == "dev"
+
+# Backend (FastAPI)
+
+FastAPI backend for the ROI calculator.
+
+## Run
+
+1. Create and activate a Python environment.
+2. Install dependencies:
+   - `pip install -e .`
+3. Start server:
+   - `uvicorn app.main:app --reload --port 8000`
+
+## API
+
+- `POST /roi`
+- `GET /health`
+
+## Example POST /roi
+
+```json
+{
+  "country": "Canada",
+  "stream": "Medical & Health Sciences",
+  "level": "PG",
+  "target_year": 2031,
+  "current_savings": 0,
+  "show_living_cost": true,
+  "expected_return_rate": 12,
+  "scholarship_percent": 0
+}
+```
