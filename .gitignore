@@ -1,0 +1,31 @@
+backend/data/final_roi_dataset_v2.csv
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# Node
+node_modules/
+
+# Build and logs
+.next/
+dist/
+build/
+*.log
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
