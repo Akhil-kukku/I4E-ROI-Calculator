@@ -4,11 +4,13 @@ app/__init__.py
 app/main.py
 app/api/__init__.py
 app/api/routes/__init__.py
+app/api/routes/catalog.py
 app/api/routes/roi.py
 app/core/__init__.py
 app/core/config.py
 app/data/__init__.py
 app/data/catalog.py
+app/data/repository.py
 app/models/__init__.py
 app/models/roi.py
 app/services/__init__.py
@@ -18,5 +20,6 @@ education_roi_api.egg-info/SOURCES.txt
 education_roi_api.egg-info/dependency_links.txt
 education_roi_api.egg-info/requires.txt
 education_roi_api.egg-info/top_level.txt
+tests/test_catalog_endpoint.py
 tests/test_roi_endpoint.py
 tests/test_roi_service.py

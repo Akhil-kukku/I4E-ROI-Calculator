@@ -87,7 +87,8 @@ def calculate_roi(payload: RoiRequest) -> RoiResponse:
 
     salary_multiplier = 1.5
     salary_growth = 0.05
-    annual_salary = avg_salary_inr if avg_salary_inr > 0 else inflated_tuition * salary_multiplier
+    fallback_salary = inflated_tuition * salary_multiplier
+    annual_salary = avg_salary_inr if avg_salary_inr > 0 else fallback_salary
     total_earnings_5yr = 0.0
     for year in range(1, 6):
         total_earnings_5yr += annual_salary * ((1 + salary_growth) ** (year - 1))
