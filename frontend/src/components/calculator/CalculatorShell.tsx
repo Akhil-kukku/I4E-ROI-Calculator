@@ -166,8 +166,6 @@ export function CalculatorShell() {
           {error && <p className="rounded-md bg-red-50 px-4 py-3 text-sm text-red-700">{error}</p>}
           <ResultsPanel
             result={result}
-            showLivingCost={values.showLivingCost}
-            onToggleLivingCost={() => setValues((prev) => ({ ...prev, showLivingCost: !prev.showLivingCost }))}
             currency={currency}
             onCurrencyChange={setCurrency}
           />
