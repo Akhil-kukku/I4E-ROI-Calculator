@@ -1,5 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 
 from app.api.routes.catalog import router as catalog_router
 from app.api.routes.roi import router as roi_router
@@ -16,9 +17,14 @@ app.add_middleware(
 )
 
 
-@app.get("/")
-def root() -> dict[str, str]:
-    return {"message": "Education ROI API", "docs": "/docs", "health": "/health"}
+@app.get("/", include_in_schema=False)
+def root() -> RedirectResponse:
+    return RedirectResponse(url="/docs", status_code=status.HTTP_307_TEMPORARY_REDIRECT)
+
+
+@app.head("/", include_in_schema=False)
+def root_head() -> Response:
+    return Response(status_code=status.HTTP_200_OK)
 
 
 @app.get("/health")
