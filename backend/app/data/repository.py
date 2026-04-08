@@ -1,10 +1,33 @@
 from __future__ import annotations
 
 import csv
+import os
 from pathlib import Path
 from typing import Any
 
-DATASET_PATH = Path(__file__).resolve().parents[2] / "data" / "final_roi_dataset_v2.csv"
+DATASET_FILENAME = "final_roi_dataset_v2.csv"
+
+
+def _resolve_dataset_path() -> Path:
+    env_path = os.getenv("DATASET_PATH", "").strip()
+    if env_path:
+        return Path(env_path).expanduser().resolve()
+
+    app_root = Path(__file__).resolve().parents[2]
+    repo_root = Path(__file__).resolve().parents[3]
+    candidates = [
+        app_root / "data" / DATASET_FILENAME,
+        repo_root / "data" / DATASET_FILENAME,
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+
+    # Keep previous default behavior for explicit error reporting.
+    return app_root / "data" / DATASET_FILENAME
+
+
+DATASET_PATH = _resolve_dataset_path()
 
 
 def _to_float(raw: str) -> float:
