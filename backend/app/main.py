@@ -16,6 +16,11 @@ app.add_middleware(
 )
 
 
+@app.get("/")
+def root() -> dict[str, str]:
+    return {"message": "Education ROI API", "docs": "/docs", "health": "/health"}
+
+
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok"}
