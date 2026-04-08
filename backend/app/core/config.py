@@ -5,7 +5,7 @@ class Settings(BaseSettings):
     app_name: str = "Education ROI API"
     app_env: str = "development"
     frontend_origin: str = "http://localhost:3000"
-    frontend_origins: str = ""
+    frontend_origins: str = "https://akhil-kukku.github.io"
 
     @property
     def cors_origins(self) -> list[str]:
