@@ -6,7 +6,6 @@ import { AffordabilityPanel } from "@/components/calculator/AfordabilityPanel";
 import { CalculatorForm } from "@/components/calculator/CalculatorForm";
 import { ResultsPanel } from "@/components/calculator/ResultsPanel";
 import { Header } from "@/components/layout/Header";
-import { InfoCards } from "@/components/sidebar/InfoCards";
 import { getCatalogOptions, getColleges, getCourses } from "@/services/catalog";
 import { calculateRoi } from "@/services/roi";
 import type { CalculatorFormState, RoiRequest, RoiResponse, StudyLevel } from "@/types/roi";
@@ -171,7 +170,6 @@ export function CalculatorShell() {
           />
           <AffordabilityPanel result={result} returnRate={values.expectedReturnRate} />
         </div>
-        <InfoCards />
       </main>
     </div>
   );
