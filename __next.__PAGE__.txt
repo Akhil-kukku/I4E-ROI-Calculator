@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[99780,["/I4E-ROI-Calculator/_next/static/chunks/0dbhjjzl8qfwv.js","/I4E-ROI-Calculator/_next/static/chunks/1881w7.t_s4yz.js"],"CalculatorShell"]
+3:I[97367,["/I4E-ROI-Calculator/_next/static/chunks/0dbhjjzl8qfwv.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{}],[["$","script","script-0",{"src":"/I4E-ROI-Calculator/_next/static/chunks/1881w7.t_s4yz.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"xLpBNqoBK-UjEvKqwktuz"}
+5:null
