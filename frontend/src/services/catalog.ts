@@ -1,8 +1,12 @@
 import api from "./api";
 import type { CatalogOptions } from "@/types/roi";
 
-export async function getCatalogOptions(): Promise<CatalogOptions> {
-  const { data } = await api.get<CatalogOptions>("/catalog/options");
+export async function getCatalogOptions(params?: {
+  country?: string;
+  stream?: string;
+  level?: string;
+}): Promise<CatalogOptions> {
+  const { data } = await api.get<CatalogOptions>("/catalog/options", { params });
   return data;
 }
 

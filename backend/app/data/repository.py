@@ -80,10 +80,22 @@ def load_records() -> list[dict[str, Any]]:
 RECORDS = load_records()
 
 
-def get_filter_options() -> dict[str, list[str]]:
-    countries = sorted({r["country"] for r in RECORDS if r["country"]})
-    streams = sorted({r["stream"] for r in RECORDS if r["stream"]})
-    levels = sorted({r["level"] for r in RECORDS if r["level"]})
+def get_filter_options(
+    country: str | None = None,
+    stream: str | None = None,
+    level: str | None = None,
+) -> dict[str, list[str]]:
+    scoped = RECORDS
+    if country:
+        scoped = [r for r in scoped if r["country"] == country]
+    if stream:
+        scoped = [r for r in scoped if r["stream"] == stream]
+    if level:
+        scoped = [r for r in scoped if r["level"] == level]
+
+    countries = sorted({r["country"] for r in scoped if r["country"]})
+    streams = sorted({r["stream"] for r in scoped if r["stream"]})
+    levels = sorted({r["level"] for r in scoped if r["level"]})
     return {"countries": countries, "streams": streams, "levels": levels}
 
 

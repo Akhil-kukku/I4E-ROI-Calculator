@@ -43,7 +43,7 @@ Backend (`backend/.env`):
 
 - `POST /roi`
 - `GET /health`
-- `GET /catalog/options`
+- `GET /catalog/options?country=&stream=&level=` (all params optional; use to fetch only valid downstream options)
 - `GET /catalog/colleges?country=&stream=&level=`
 - `GET /catalog/courses?country=&stream=&level=&college_name=`
 

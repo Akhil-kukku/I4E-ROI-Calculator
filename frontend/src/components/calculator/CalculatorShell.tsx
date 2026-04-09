@@ -41,16 +41,9 @@ export function CalculatorShell() {
       try {
         const options = await getCatalogOptions();
         setCountries(options.countries);
-        setStreams(options.streams);
-        const nextLevels = options.levels.filter((level): level is StudyLevel => level === "UG" || level === "PG");
-        if (nextLevels.length > 0) {
-          setLevels(nextLevels);
-        }
         setValues((prev) => ({
           ...prev,
           country: prev.country || options.countries[0] || "",
-          stream: prev.stream || options.streams[0] || "",
-          level: prev.level || (nextLevels[0] ?? "UG"),
         }));
       } catch (unknownError) {
         console.error(unknownError);
@@ -62,8 +55,89 @@ export function CalculatorShell() {
   }, []);
 
   useEffect(() => {
+    let cancelled = false;
+
+    async function loadCountryScopedOptions() {
+      if (!values.country) {
+        setStreams([]);
+        setLevels([]);
+        return;
+      }
+
+      try {
+        const options = await getCatalogOptions({ country: values.country });
+        if (cancelled) {
+          return;
+        }
+        const nextLevels = options.levels.filter((level): level is StudyLevel => level === "UG" || level === "PG");
+        setStreams(options.streams);
+        setLevels(nextLevels);
+        setValues((prev) => {
+          const nextStream = options.streams.includes(prev.stream) ? prev.stream : (options.streams[0] ?? "");
+          const nextLevel = nextLevels.includes(prev.level) ? prev.level : (nextLevels[0] ?? "UG");
+          return {
+            ...prev,
+            stream: nextStream,
+            level: nextLevel,
+            collegeName: "",
+            courseName: "",
+          };
+        });
+      } catch (unknownError) {
+        console.error(unknownError);
+      }
+    }
+
+    loadCountryScopedOptions();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [values.country]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadStreamScopedOptions() {
+      if (!values.country || !values.stream) {
+        return;
+      }
+
+      try {
+        const options = await getCatalogOptions({ country: values.country, stream: values.stream });
+        if (cancelled) {
+          return;
+        }
+        const nextLevels = options.levels.filter((level): level is StudyLevel => level === "UG" || level === "PG");
+        setLevels(nextLevels);
+        setValues((prev) => ({
+          ...prev,
+          level: nextLevels.includes(prev.level) ? prev.level : (nextLevels[0] ?? "UG"),
+          collegeName: "",
+          courseName: "",
+        }));
+      } catch (unknownError) {
+        console.error(unknownError);
+      }
+    }
+
+    loadStreamScopedOptions();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [values.country, values.stream]);
+
+  useEffect(() => {
     async function loadColleges() {
       if (!values.country || !values.stream || !values.level) {
+        setColleges([]);
+        setCourses([]);
+        setValues((prev) => ({
+          ...prev,
+          collegeName: "",
+          courseName: "",
+        }));
         return;
       }
       try {
@@ -76,6 +150,7 @@ export function CalculatorShell() {
         setValues((prev) => ({
           ...prev,
           collegeName: items.includes(prev.collegeName) ? prev.collegeName : (items[0] ?? ""),
+          courseName: "",
         }));
       } catch (unknownError) {
         console.error(unknownError);
@@ -88,6 +163,11 @@ export function CalculatorShell() {
   useEffect(() => {
     async function loadCourses() {
       if (!values.country || !values.stream || !values.level || !values.collegeName) {
+        setCourses([]);
+        setValues((prev) => ({
+          ...prev,
+          courseName: "",
+        }));
         return;
       }
       try {

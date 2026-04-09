@@ -14,7 +14,7 @@ FastAPI backend for the ROI calculator.
 
 - `POST /roi`
 - `GET /health`
-- `GET /catalog/options`
+- `GET /catalog/options` (supports optional `country`, `stream`, and `level` query params for scoped options)
 - `GET /catalog/colleges`
 - `GET /catalog/courses`
 

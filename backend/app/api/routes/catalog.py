@@ -6,8 +6,13 @@ router = APIRouter(prefix="/catalog", tags=["Catalog"])
 
 
 @router.get("/options")
-def catalog_options() -> dict[str, list[str]]:
-    return get_filter_options()
+def catalog_options(
+    country: str | None = Query(default=None, min_length=2),
+    stream: str | None = Query(default=None, min_length=2),
+    level: str | None = Query(default=None, min_length=2),
+) -> dict[str, list[str]]:
+    normalized_level = level.upper() if level else None
+    return get_filter_options(country=country, stream=stream, level=normalized_level)
 
 
 @router.get("/colleges")
